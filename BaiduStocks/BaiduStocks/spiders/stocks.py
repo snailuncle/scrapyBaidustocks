@@ -13,21 +13,33 @@ class StocksSpider(scrapy.Spider):
     start_urls = ['http://quote.eastmoney.com/stocklist.html']
 
     def parse(self, response):
+        # 把所有股票编号写入文件---------------------------------
+        with open("stocksTest.txt", 'w') as f:
+            # 写入响应内容主体
+            f.write('')
+        # -------------------------------------------------------------
         # response响应对象中的a标签,a标签的属性,href属性的值
         for href in response.css("a::attr(href)").extract():
             # href写入文件
-            with open("stocksTest.txt", 'a') as f:
-                # 写入响应内容主体
-                f.write(href + '\n')
+            # with open("stocksTest.txt", 'a') as f:
+            #     # 写入响应内容主体
+            #     f.write(href + '\n')
             # print('a标签中包含href属性的href条目=', href)
             # time.sleep(2)scr
-            # try:
-            #     stock = re.findall(r"[s][hz]\d{6}", href)[0]
-            #     url = "https://gupiao.baidu.com/stock/" + stock + ".html"
-            #     # 此处回调函数---parse_stock
-            #     yield scrapy.Request(url, callback=self.parse_stock)
-            # except BaseException:
-            #     continue
+            try:
+                stock = re.findall(r"[s][hz]\d{6}", href)[0]
+
+                # 把所有股票编号写入文件---------------------------------
+                with open("stocksTest.txt", 'a') as f:
+                    # 写入响应内容主体
+                    f.write(href + '\n')
+                # -------------------------------------------------------------
+
+                # url = "https://gupiao.baidu.com/stock/" + stock + ".html"
+                # # 此处回调函数---parse_stock
+                # yield scrapy.Request(url, callback=self.parse_stock)
+            except BaseException:
+                continue
 
     def parse_stock(self, response):
         infoDict = {}
