@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import re
+import sys
+
 # import time
 
 
@@ -18,6 +20,9 @@ class StocksSpider(scrapy.Spider):
             # 写入响应内容主体
             f.write('')
         # -------------------------------------------------------------
+        count = 0
+        # -------------------------------------------------------------
+
         # response响应对象中的a标签,a标签的属性,href属性的值
         for href in response.css("a::attr(href)").extract():
             # href写入文件
@@ -25,18 +30,30 @@ class StocksSpider(scrapy.Spider):
             #     # 写入响应内容主体
             #     f.write(href + '\n')
             # print('a标签中包含href属性的href条目=', href)
-            # time.sleep(2)scr
+            # time.sleep(2)
             try:
                 stock = re.findall(r"[s][hz]\d{6}", href)[0]
 
                 # 把所有股票编号写入文件---------------------------------
-                with open("stocksTest.txt", 'a') as f:
-                    # 写入响应内容主体
-                    f.write(stock + '\n')
+                # with open("stocksTest.txt", 'a') as f:
+                #     # 写入响应内容主体
+                #     f.write(stock + '\n')
                 # -------------------------------------------------------------
 
-                # url = "https://gupiao.baidu.com/stock/" + stock + ".html"
-                # # 此处回调函数---parse_stock
+                url = "https://gupiao.baidu.com/stock/" + stock + ".html"
+                # 把所有股票编号百度股票网址写入文件---------------------------------
+                with open("stocksTest.txt", 'a') as f:
+                    # 写入响应内容主体
+                    f.write(url + '\n')
+                # -------------------------------------------------------------
+                # 此处回调函数---parse_stock
+                # -------------------------------------------------------------
+                print(count)
+                count = count + 1
+                if count > 100:
+                    sys.exit("Error message")
+                # -------------------------------------------------------------
+
                 # yield scrapy.Request(url, callback=self.parse_stock)
             except BaseException:
                 continue
