@@ -32,7 +32,7 @@ class StocksSpider(scrapy.Spider):
                 # 把所有股票编号写入文件---------------------------------
                 with open("stocksTest.txt", 'a') as f:
                     # 写入响应内容主体
-                    f.write(href + '\n')
+                    f.write(stock + '\n')
                 # -------------------------------------------------------------
 
                 # url = "https://gupiao.baidu.com/stock/" + stock + ".html"
