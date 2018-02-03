@@ -54,11 +54,17 @@ class StocksSpider(scrapy.Spider):
                     sys.exit("Error message")
                 # -------------------------------------------------------------
 
-                # yield scrapy.Request(url, callback=self.parse_stock)
-            except BaseException:
+                yield scrapy.Request(url, callback=self.parse_stock)
+            except Exception as e:
+                print(e)
                 continue
+            # except BaseException:
+            #     continue
 
     def parse_stock(self, response):
+        # --------------------------------为什么一个数据都没有------------------------------------------------------------------
+        print("网站连接状态")
+        print("网站连接状态" + str(response.status))
         infoDict = {}
         stockInfo = response.css(".stock-bets")
         name = stockInfo.css(".bets-name").extrack()[0]
@@ -68,12 +74,16 @@ class StocksSpider(scrapy.Spider):
             key = re.findall(r">.*</dt>", keyList[i])[0][1:-5]
             try:
                 val = re.findall(r"\d+\.?.*</dd>", valueList[i])[0][0:-5]
+                print('try中:key=' + key + '    val=' + val)
             except BaseException:
                 val = "--"
+            print('key=' + key + '    val=' + val)
             infoDict[key] = val
 
-        infoDict.update(
-            {"股票名称": re.findall("\s.*\(", name)[0].split()[0] +
-             re.findall("\>.*\<", name)[0][1:-1]})
+        infoDict.update({
+            "股票名称":
+            re.findall("\s.*\(", name)[0].split()[0] +
+            re.findall("\>.*\<", name)[0][1:-1]
+        })
 
         yield infoDict
