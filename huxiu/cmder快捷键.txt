@@ -1,0 +1,13 @@
+双Tab，用于补全
+
+Ctrl+T，建立新页
+
+Ctrl+W，关闭标签页
+
+Ctrl+Tab，切换标签页
+
+Alt+F4，关闭所有标签页
+
+Ctrl+1，切换到第一个页签，Ctrl+2同理
+
+Alt + enter，切换到全屏状态
