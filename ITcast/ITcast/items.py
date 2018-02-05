@@ -8,7 +8,9 @@
 import scrapy
 
 
-class ItcastItem(scrapy.Item):
+class ITcastItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    name = scrapy.Field()
+    title = scrapy.Field()
+    info = scrapy.Field()
