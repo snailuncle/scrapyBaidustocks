@@ -13,6 +13,7 @@ class TencentPipeline(object):
 
     def process_item(self, item, spider):
         content = json.dumps(dict(item), ensure_ascii=False) + ",\n"
+        # content = json.dumps(dict(item)) + ",\n"
         self.f.write(content)
         return item
 
