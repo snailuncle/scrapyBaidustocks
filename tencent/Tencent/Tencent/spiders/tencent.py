@@ -48,3 +48,11 @@ class TencentSpider(scrapy.Spider):
             self.offset += 10
             url = self.baseURL + str(self.offset)
             yield scrapy.Request(url, callback = self.parse)
+
+        # 提取下一页
+        # //a[@id="next"]/@href
+        # 提取最后一页的下一页
+        # a[@class="noactive" and @id="next"]
+        # if len(response.xpath('a[@class="noactive" and @id="next"]')) == 0:
+        #     url = response.xpath('//a[@id="next"]/@href').extract()[0]
+        #     yield scrapy.Request("http://hr.tencent.com/" + url, callback=self.parse)
