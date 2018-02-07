@@ -45,9 +45,9 @@ class HuxiuSpider(scrapy.Spider):
             yield scrapy.Request(url, callback=self.parse_article)
 
     def parse_article(self, response):
-        print('parse_article响应', response)
-        print('response类型   ', response)
-        sys.exit("Error message")
+        # print('parse_farticle响应', response)
+        # print('response类型   ', response)
+        # sys.exit("Error message")
         item = HuxiuItem()
         # detail细节  wrap围巾,包  article文章,签订协议
         detail = response.xpath('//div[@class="article-wrap"]')
