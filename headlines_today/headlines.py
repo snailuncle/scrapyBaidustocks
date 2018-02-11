@@ -1,8 +1,11 @@
+# 今日头条爬虫 更新日期  2018 02 11
 # coding=utf-8 ##以utf-8编码储存中文字符
 import requests
 import json
 import re
-import time
+import os
+from hashlib import md5
+# import time
 from requests.exceptions import RequestException
 from urllib.parse import urlencode
 from bs4 import BeautifulSoup
@@ -113,20 +116,22 @@ def parse_page_detail(html):
     print('\n' + '*' * 50 + '\n' + '\n' + '\n' + 'help' + '\n')
     # help(result)
     if result:
-        print('\n' + '*' * 50 + '\n' + '\n' + '\n' + 'image_pattern_result' + '\n' + result.group(1))
+        print('\n' + '*' * 50 + '\n' + '\n' + '\n' + 'image_pattern_result' + '\n')
         data = result.group(1)
         print(type(data), 'data')
         if data:
+            data = re.sub(r'\\', '', data)
             pictures_dict = json.loads(data)
-            print(type(pictures_dict ), 'pictures_dict')
+            print(type(pictures_dict), 'pictures_dict')
             if pictures_dict:
                 print('pictures_dict', 'right')
-                print(pictures_dict)
-                with open('索引页.txt', 'a', encoding='utf-8') as f:
-                    f.write('\n' + pictures_dict)
+                # print(pictures_dict)
                 if 'sub_images' in pictures_dict.keys():
                     sub_images = pictures_dict.get('sub_images')
-                    print(type(sub_images))
+                    images = [item.get('url') for item in sub_images]
+                    print('images', type(images))
+                    return images
+                    # help(sub_images)
                     # images = [item.get('url') for item in sub_images]
                 # help(dict)
                 # if 'sub_images' in data.keys():
@@ -136,23 +141,6 @@ def parse_page_detail(html):
                 #         'title': title,
                 #         'images': images
                 #     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             else:
                 print('pictures_dict = json.loads(data)', 'wrong')
         else:
@@ -168,18 +156,32 @@ def parse_page_detail(html):
     #             'title': title,
     #             'images': images
     #         }
-
-
-
     else:
         print('\n' + '*' * 50 + '\n' + '\n' + '\n' + 'image_pattern_result', 'wrong')
 
 
+def download_image(url):
+    print('正在下载', url)
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            save_image(response.content)
+    except Exception as e:
+        print('请求图片出错', url)
+        return None
 
 
+def save_image(content):
+    file_path = '{0}/{1}.{2}'.format(os.getcwd() + '/pic',
+                                     md5(content).hexdigest(), 'jpg')
+    if not os.path.exists(file_path):
+        with open(file_path, 'wb') as f:
+            f.write(content)
+            f.close()
 
 
 def main():
+    k = 1
     print('main', '*' * 50)
     html = get_page_index()
     for url in parse_page_index(html):
@@ -188,7 +190,15 @@ def main():
     #     time.sleep(3)
         if html:
             result = parse_page_detail(html)
-            # print(result)
+            print(result)
+            if result:
+                with open('索引页.txt', 'a', encoding='utf-8') as f:
+                    f.write(json.dumps(result, ensure_ascii=False) + '\n')
+                # 遍历result类型  list   保存该列表中,所有链接的图片到文件夹
+                for picture_url in result:
+                    download_image(picture_url)
+                    print("保存数量：%s   图片链接：%s" % (k, picture_url))
+                    k = k + 1
 
 
 if __name__ == '__main__':

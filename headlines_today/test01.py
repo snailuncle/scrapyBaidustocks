@@ -1,6 +1,8 @@
-dict = "{\"count\":18,\"sub_images\":[{\"url\":\"http:\\/\\/p1.pstatp.com\\/origin\\/2ebe000042c272cd8ca4\",\"width\":650}]}"
-print(dict)
-import json
-data = json.loads(dict)
-print(data)
-print(type(data))
+import os
+from hashlib import md5
+content = 'abc'.encode('utf-8')
+print(os.getcwd())
+file_path = '{0}/{1}.{2}'.format(os.getcwd() + '\pic', md5(content).hexdigest(), 'jpg')
+print(file_path)
+with open(file_path, "w") as f:
+    f.write("def")
