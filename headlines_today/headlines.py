@@ -4,16 +4,13 @@ import requests
 import json
 import re
 import os
-from multiprocessing import Pool
 from hashlib import md5
 # import time
 from requests.exceptions import RequestException
 from urllib.parse import urlencode
 from bs4 import BeautifulSoup
 
-KEYWORD = '模特女人'
 
-print(os.getcwd())
 # 清空某文件,用来写入图集链接信息
 with open('索引页.txt', 'w') as f:
     f.truncate()
@@ -21,12 +18,12 @@ with open('索引页.txt', 'w') as f:
 
 # https://www.toutiao.com/search_content/?offset=80&format=json&keyword=%E8%A1%97%E6%8B%8D&autoload=true&count=20&cur_tab=1&from=search_tab
 # 得到索引页的内容
-def get_page_index(KEYWORD,offset):
+def get_page_index():
     print('get_page_index', '*' * 50)
     data = {
-        'offset': offset,
+        'offset': '20',
         'format': 'json',
-        'keyword': KEYWORD,
+        'keyword': '福',
         'autoload': 'true',
         'count': '20',
         'cur_tab': '1',
@@ -72,10 +69,8 @@ def parse_page_index(html):
                     print("if item_content:")
             else:
                 print("for item in data.get('data'):")
-                pass
         else:
             print("if data and 'data' in data.keys():")
-            pass
     except Exception as e:
         print(e)
         pass
@@ -177,13 +172,7 @@ def download_image(url):
 
 
 def save_image(content):
-    path = os.getcwd()
-    directory = '/pic'
-    folder_full_name = path + directory
-    if not os.path.exists(folder_full_name):
-        # 创建文件夹
-        os.makedirs(folder_full_name)
-    file_path = '{0}/{1}.{2}'.format(folder_full_name,
+    file_path = '{0}/{1}.{2}'.format(os.getcwd() + '/pic',
                                      md5(content).hexdigest(), 'jpg')
     if not os.path.exists(file_path):
         with open(file_path, 'wb') as f:
@@ -191,11 +180,10 @@ def save_image(content):
             f.close()
 
 
-def main(offset):
-    main_KEYWORD = KEYWORD
+def main():
     k = 1
     print('main', '*' * 50)
-    html = get_page_index(main_KEYWORD, offset)
+    html = get_page_index()
     for url in parse_page_index(html):
         print('单个图集的链接地址:', url)
         html = get_page_detail(url)
@@ -213,35 +201,5 @@ def main(offset):
                     k = k + 1
 
 
-
-
 if __name__ == '__main__':
-    pool = Pool()
-    pool.map(main, [i * 10 for i in range(10)])
-    software = "C:/Users/Public/Desktop/Picasa 3.lnk"
-    os.startfile(software)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    main()
