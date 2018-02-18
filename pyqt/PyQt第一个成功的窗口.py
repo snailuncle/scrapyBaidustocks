@@ -1,3 +1,51 @@
+# QT Designer serves to generate the design of the view, pyuic5 converts that design into python code, this element must be used with logic, in addition it is recommended not to modify it.
+
+# first solution:
+
+# import sys
+
+# if __name__ == "__main__":
+#     app = QtWidgets.QApplication(sys.argv)
+#     ex = Ui_MainWindow()
+#     w = QtWidgets.QMainWindow()
+#     ex.setupUi(w)
+#     w.show()
+#     sys.exit(app.exec_())
+# Second Solution:
+
+# class MainWindow(QtWidgets.QMainWindow):
+#     def __init__(self, parent=None):
+#         super(MainWindow, self).__init__(parent=parent)
+#         ui = Ui_MainWindow()
+#         ui.setupUi(self)
+
+
+# import sys
+
+# if __name__ == "__main__":
+#     app = QtWidgets.QApplication(sys.argv)
+#     w = MainWindow()
+#     w.show()
+#     sys.exit(app.exec_())
+# Third solution:
+
+# class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+#     def __init__(self, parent=None):
+#         super(MainWindow, self).__init__(parent=parent)
+#         self.setupUi(self)
+
+
+
+# import sys
+
+# if __name__ == "__main__":
+#     app = QtWidgets.QApplication(sys.argv)
+#     w = MainWindow()
+#     w.show()
+#     sys.exit(app.exec_())
+
+
+
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'D:\pyqt\untitled.ui'
@@ -81,3 +129,4 @@ if __name__=="__main__":
     ui.setupUi(widget)  
     widget.show()  
     sys.exit(app.exec_())  
+
