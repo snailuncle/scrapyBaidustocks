@@ -1,35 +1,29 @@
-#-*-coding:utf-8-*-
+import threading
+print('')
 
 
-import threading, time
+class My_thread(threading.Thread):
+    def __init__(self):
+        super().__init__()
+
+    def run(self):
+        global n
+        if lock.acquire():
+
+            print('Thread:', n)
+            n += 1
+            lock.release()
 
 
-def sum(n):
-    sum = 0
-    for i in range(1, n+1):
-        sum += i
-        time.sleep(0.001)
-    print(sum)
+n = 0
+t = []
+lock = threading.Lock()
+for i in range(10):
+    my = My_thread()
+    t.append(my)
 
+for i in range(10):
+    t[i].start()
 
-start_time = time.time()
-sum(1000)
-sum(1000)
-
-interval_first = time.time() - start_time
-print(interval_first)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# for i in range(10):
+#     t[i].join()
