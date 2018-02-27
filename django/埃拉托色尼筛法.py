@@ -1,4 +1,4 @@
-import math
+import math,sys
 
 def producePrime2(max):  
     li = []  
@@ -33,8 +33,10 @@ def producePrime2(max):
             # print("前", k)
             k += 1
             # print("后", k)
-            if k == 521025:
+            if k == 521520:
                 print("k=", k, "i=", i)
+                sys.exit(0)
 
 num = 11000000
 producePrime2(num)
+# 7709929

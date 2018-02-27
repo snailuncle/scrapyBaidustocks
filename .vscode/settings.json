@@ -12,5 +12,14 @@
     // "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
     "terminal.integrated.shell.windows": "D:\\cmder\\cmder_mini\\Cmder.exe",
     "editor.wordWrap": "on",
-    "files.autoGuessEncoding": true
+    "files.autoGuessEncoding": true,
+    "args":[
+        "param_one",
+        "param_twe"
+    ],
+    "debugOptions": [
+        "WaitOnAbnormalExit",
+        "WaitOnNormalExit",
+        "RedirectOutput"
+    ]
 }
