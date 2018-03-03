@@ -1,15 +1,15 @@
 # 游戏主界面
-# 坦 克  我方  敌方
-#  炮弹
-#  隔离墙
-#  爆炸
-# 坦克和子弹的图片路径为"D:\scrapyProject\pic\坦克上.png"
+# 坦克  我方  敌方
+# 炮弹
+# 隔离墙
+# 爆炸
+
 from random import randint
 
 import sys,time
 
-i  mport pygame
-fr om pygame.locals import *
+import pygame
+from pygame.locals import *
 
 
 class TankMain(object):
