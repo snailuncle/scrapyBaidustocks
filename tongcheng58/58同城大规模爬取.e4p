@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Project SYSTEM "Project-5.1.dtd">
+<!-- eric project file for project 58同城大规模爬取 -->
+<!-- Saved: 2018-03-11, 17:33:52 -->
+<!-- Copyright (C) 2018 LuFei, 1789500304@qq.com -->
+<Project version="5.1">
+  <Language></Language>
+  <Hash>58cea4d26799d688323d41a8e0394e1a5a79b332</Hash>
+  <ProgLanguage mixed="0">Python3</ProgLanguage>
+  <ProjectType>Other</ProjectType>
+  <Version>0.1</Version>
+  <Author>LuFei</Author>
+  <Email>1789500304@qq.com</Email>
+  <Eol index="0"/>
+  <Sources>
+    <Source>58同城单页信息爬取.py</Source>
+    <Source>Xpath网页动态信息爬取.py</Source>
+    <Source>__init__.py</Source>
+    <Source>channel_extract.py</Source>
+    <Source>mysql相关命令.py</Source>
+    <Source>page_parsing.py</Source>
+    <Source>vim快捷键.py</Source>
+    <Source>临时测试.py</Source>
+    <Source>播放歌曲.py</Source>
+    <Source>数据库查询相关命令.py</Source>
+    <Source>连接mongo.py</Source>
+  </Sources>
+  <Vcs>
+    <VcsType>None</VcsType>
+  </Vcs>
+  <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.e4p" type="OTHERS"/>
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES"/>
+    <FiletypeAssociation pattern="*.md" type="OTHERS"/>
+    <FiletypeAssociation pattern="*.proto" type="PROTOCOLS"/>
+    <FiletypeAssociation pattern="*.py" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.py3" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.pyw" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.pyw3" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.rst" type="OTHERS"/>
+    <FiletypeAssociation pattern="*.txt" type="OTHERS"/>
+    <FiletypeAssociation pattern="README" type="OTHERS"/>
+    <FiletypeAssociation pattern="README.*" type="OTHERS"/>
+  </FiletypeAssociations>
+</Project>
